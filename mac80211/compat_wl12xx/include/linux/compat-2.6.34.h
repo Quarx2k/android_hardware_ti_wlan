@@ -159,32 +159,7 @@ do {								\
 /* source: include/linux/netdevice.h */
 
 
-static inline void device_lock(struct device *dev)
-{
-#if defined(CONFIG_PREEMPT_RT) || defined(CONFIG_PREEMPT_DESKTOP)
-        mutex_lock(&dev->mutex);
-#else
-	down(&dev->sem);
-#endif
-}
 
-static inline int device_trylock(struct device *dev)
-{
-#if defined(CONFIG_PREEMPT_RT) || defined(CONFIG_PREEMPT_DESKTOP)
-	return mutex_trylock(&dev->mutex);
-#else
-	return down_trylock(&dev->sem);
-#endif
-}
-
-static inline void device_unlock(struct device *dev)
-{
-#if defined(CONFIG_PREEMPT_RT) || defined(CONFIG_PREEMPT_DESKTOP)
-        mutex_unlock(&dev->mutex);
-#else
-	up(&dev->sem);
-#endif
-}
 
 #if defined(CONFIG_PCMCIA) || defined(CONFIG_PCMCIA_MODULE)
 #define PCMCIA_DEVICE_PROD_ID3(v3, vh3) { \
