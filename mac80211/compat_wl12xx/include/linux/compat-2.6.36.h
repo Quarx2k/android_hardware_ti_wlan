@@ -126,7 +126,7 @@ static inline void tty_unlock(void) __releases(kernel_lock)
 
 #define __rcu
 
-static inline void pm_wakeup_event(struct device *dev, unsigned int msec) {}
+
 
 static inline bool skb_defer_rx_timestamp(struct sk_buff *skb)
 {
